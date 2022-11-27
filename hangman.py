@@ -17,14 +17,14 @@ class Hangman:
 
     def __init__(self) -> None:
         with open("liste_francais.txt", "r", encoding="utf8") as word_file:
-            self.__word = random.choice(word_file.readlines())
-            self.__lives = len(self.__word) + 5
-            self.__letters_found = ["_" for _ in self.__word]
-            self.put_know_letter(
-                self.__word[0], verbose=False
-            )  # The first letter is alway printed!
-            self.__false_letters = set()
-            self.__word_has_been_guessed = False
+            self.__word = random.choice(word_file.readlines())[:-1]
+        self.__lives = len(self.__word) + 5
+        self.__letters_found = ["_" for _ in self.__word]
+        self.put_know_letter(
+            self.__word[0], verbose=False
+        )  # The first letter is alway printed!
+        self.__false_letters = set()
+        self.__word_has_been_guessed = False
 
     def __is_letter_in_word(self, letter: str) -> bool:
         """
@@ -35,6 +35,12 @@ class Hangman:
             bool: True if the letter is in the word, False otherwise.
         """
         return letter in self.__word
+
+    def get_word(self) -> str:
+        """
+        Return the initial word to guess.
+        """
+        return self.__word
 
     def put_know_letter(self, letter: str, verbose=True):
         """

@@ -133,6 +133,7 @@ def play():
     )
     if nb_lives_standing <= 0:
         print("plus de vie restante!")
+    print(f"The initial word was : {hangman.get_word()}")
     print(f"Your score : {score}")
 
 
