@@ -11,11 +11,9 @@ from hangman import Hangman
 
 
 WELCOME_MESSAGE: str = """
-TOTO
 
-
----
--  - - - - 
+Welcome to this project, the purpose if this file is to understand how does automated 
+tests are done on project. This one is not exhaustive but it is used for interactive introduction
 
 """
 
