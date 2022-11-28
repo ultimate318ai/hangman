@@ -18,6 +18,7 @@ Hangman - Partie terminée, on a deviné le mot
 
 
 Hangman - Partie terminée, on a perdu
+    [Documentation]  Vérifie que la partie se termine quand on a plus de vies
     Guess Word Letter  False
 
 Hangman - Mot incorrect
