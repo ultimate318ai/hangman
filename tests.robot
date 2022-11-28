@@ -22,4 +22,5 @@ Hangman - Partie terminée, on a perdu
     Guess Word Letter  False
 
 Hangman - Mot incorrect
+    [Documentation]  Vérifie que la partie se termine si on devine trop de mots.
     Guess Incorect Word
