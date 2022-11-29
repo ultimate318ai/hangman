@@ -1,18 +1,26 @@
 """
-This file is used for hangman game.
+Ce module implemente le jeu du pendu.
 """
 import random
 
 
 class Hangman:
     """
-    Class used for hangman game.
+    Class du jeu du pendu.
     """
+    # Declaration des attributs de classes
 
+    # Mot à devinner
     __word: str = None
+    # Liste de lettre trouvée
     __letters_found: list[str] = None
+    # Liste de lettre utilisée mais pas dans le mot
     __false_letters: set[str] = None
+    # Mots devinées qui ne sont pas le mot
+    __false_words: set[str] = None
+    # Nombre de vies 
     __lives: int = 0
+    # Est-ce que le mot a été deviné ?
     __word_has_been_guessed: bool = None
 
     def __init__(self) -> None:
@@ -22,63 +30,66 @@ class Hangman:
         self.__letters_found = ["_" for _ in self.__word]
         self.put_know_letter(
             self.__word[0], verbose=False
-        )  # The first letter is alway printed!
+        )  # On devoile toujours la première lettre!
         self.__false_letters = set()
+        self.__false_words = set()
         self.__word_has_been_guessed = False
 
     def __is_letter_in_word(self, letter: str) -> bool:
         """
-        check if the letter is in the word used for the game.
+        Vérifie si la lettre est dans le mot a deviner.
         Args:
-            letter (str): the letter used for checking.
+            letter (str): la lettre.
         Returns:
-            bool: True if the letter is in the word, False otherwise.
+            bool: True si la lettre est dans le mot, False sinon.
         """
         return letter in self.__word
 
     def get_word(self) -> str:
         """
-        Return the initial word to guess.
+        Renvoie le mot à deviner.
         """
         return self.__word
 
     def put_know_letter(self, letter: str, verbose=True):
         """
-        If the letter is in the word, update the content displayed, else decrease by 1 user life
-        and add letter to wrong ones list.
+        Si la lettre est dans le mot à deviner, devoile son/ses emplacement(s),
+        sinon ajoute la lettre à la liste des lettres fausses et diminue d'une vie.
         Args:
-            letter (str): the letter to put in the found letters if the letter is in word.
-            verbose (bool): If True, the print messages will be displayed.
+            letter (str): La lettre a mettre dans la liste des lettres trouvées.
+            verbose (bool): Si True, affiche le print.
         """
-        if self.__is_letter_in_word(letter):
+        
+        if ...: # Si la lettre est dans le mot à deviner
             print(verbose * f"{letter=} was in word !")
-            for index, _letter in enumerate(self.__word):
+            for index, _letter in enumerate(...): # On parcourt les lettres du mot
                 if _letter == letter:
-                    self.__letters_found[index] = _letter
+                    self.__letters_found[...] = ... # Decouvre la lettre à son emplacement si la lettre du mot correspond à la lettre deviné
         else:
             print(verbose * f"{letter=} was not in word....")
-            self.__lives -= 1
-            self.__false_letters.add(letter)
+            self.__lives = ... # Diminue le nombre de vies
+            self.__false_letters.add(...) # Ajoute la lettre trouvée à la liste des mauvaises lettres
 
     def put_know_word(self, word: str):
         """
-        If the word is the word expected, player should won,
-        else, add word to wrong list and decrease by 2 player life.
+        Si le mot est deviné, le joueur gagne la partie.
+        sinon, sinon on ajoute le mot à la liste des mauvais mot,
+        et on diminue de 2 les vies.
         Args:
-            word (str): The word given.
+            word (str): Le mot donné.
         """
         if word == self.__word:
             print("This was the word GG bro !")
-            self.__word_has_been_guessed = True
+            self.__word_has_been_guessed = ... # Mettre à jour la condition de victoire
         else:
             print("This was not the word... ")
-            self.__lives -= 2
-            self.__false_letters.add(word)
+            self.__lives = ...  # Diminue le nombre de vie par 2
+            self.__false_words.add(word)
 
     def is_game_over(self) -> bool:
         """
         Returns:
-            bool: True if the game is finished, False otherwise.
+            bool: True si la partie est terminée, False sinon.
         """
         return (
             self.__lives <= 0
@@ -88,7 +99,7 @@ class Hangman:
 
     def is_word_guess_by_user_prompt(self) -> bool:
         """
-        Return True if the word has been guessed by the user, entering the full word.
+        Return True si le mot a été deviné par l'utilisateur, en entrant le mot complet.
         """
         return self.__word_has_been_guessed
 
@@ -96,10 +107,10 @@ class Hangman:
         self,
     ) -> tuple[int, int, int]:
         """
-        Return the following information :
-            - nb lives left
-            - word len
-            - letter_standing (if the word has been found in word attempt)
+        Renvoie les informations suivantes :
+            - nombre de vies restantes.
+            - longueur du mot.
+            - nombre de lettres restantes à être trouvées.
         """
         return (
             self.__lives,
@@ -108,4 +119,4 @@ class Hangman:
         )
 
     def __repr__(self) -> str:
-        return f"Word to guess : \033[1;32;40m{self.__letters_found} \033[1;37;40m. Wrong letters : \033[1;31;40m {list(self.__false_letters)} \033[1;37;40m"
+        return f"Word to guess : \033[1;32;40m{self.__letters_found} \033[1;37;40m. Wrong letters : \033[1;31;40m {list(self.__false_letters) + list(self.__false_words)} \033[1;37;40m"
