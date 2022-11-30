@@ -102,10 +102,10 @@ def play():
             input_player: int = int(input())
             match input_player:
                 case 1:
-                    letter_given = input("Give your letter : ")
+                    letter_given = input("Give your letter : ").lower()
                     hangman.put_know_letter(letter_given)
                 case 2:
-                    word_given = input("Give the word : ")
+                    word_given = input("Give the word : ").lower()
                     hangman.put_know_word(word_given)
                 case 3:
                     print("bye bye!")

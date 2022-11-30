@@ -19,7 +19,9 @@ class Hangman:
         with open("liste_francais.txt", "r", encoding="utf8") as word_file:
             self.__word = random.choice(word_file.readlines())[:-1]
             self.__lives = len(self.__word) + 5
-            self.__letters_found = ["_" for _ in self.__word]
+            self.__letters_found = [
+                "_" * (letter != "-") or "-" for letter in self.__word
+            ]
             self.put_know_letter(
                 self.__word[0], verbose=False
             )  # The first letter is alway printed!
